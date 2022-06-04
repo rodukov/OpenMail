@@ -10,7 +10,7 @@
 
      <!-- Register New Mail -->
     <div class="register" v-show="getEmails[0]">
-      <p v-on:click="$store.commit('updateWindow', false)" style="font-family: 'arial'; text-align: right; padding-right: 15px; padding-top: 15px; margin: 0;">Close</p>
+      <p v-on:click="$store.commit('updateWindow', false)" style="font-family: 'arial'; text-align: right; padding-right: 15px; padding-top: 15px; margin: 0;"><img src="../assets/hide.png" style="height: 32px; width: 32px;"></p>
       <p class="regp">Registration</p>
       <p class="regp-m">Receive your OpenMail. Unlimited number of mailboxes. Completely free. </p>
       <div class="receive-div"><p class="receive" v-on:click="register_mail">Receive</p></div>
@@ -171,9 +171,9 @@ span:hover{
   left: 0;
   right: 0;
   top: 0;
-  bottom: 0;
 
   /* Customize */
+  padding-bottom: 25px;
   background: rgb(252, 252, 252);
   border-radius: 6.151px;
   box-shadow: 0px 0px 10px rgb(192, 192, 192);
@@ -223,6 +223,12 @@ span:hover{
 .email_item {
   font-family: 'Poppins';
   animation: activate .3s;
+  border-top: 1px solid rgb(230, 230, 230);
+  border-bottom: 1px solid rgb(230, 230, 230);
+  padding: 5%;
+  margin: 5%;
+  margin-top: 0%;
+  box-shadow: 0px 5px 8px rgb(207, 207, 207);
 }
 .email_container {
   justify-content: center;

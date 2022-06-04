@@ -20,7 +20,8 @@
     </div>
 
     <div class="view_letter" v-show="readshow">
-        <p class="a b c" style="border-radius: 25px;" v-html="readletter['body']"></p>
+        <p style="text-align: right; "><img src="../assets/hide.png" class="letter-close" style="height: 32px; width: 32px;" v-on:click="readshow=!readshow"></p>
+        <p class="a b c letter" v-html="readletter['body']"></p>
     </div>
 </div>
 </template>
@@ -57,20 +58,25 @@ export default defineComponent({
         }
     },
     mounted() {
-        document.title = "Account";
+        document.title = `${this.email} | OpenMail`;
         this.inbox(localStorage.email)
     }
 })
 </script>
 
 <style>
-
+@keyframes activate {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 .Account-view { display: flex; }
 .headers { display: flex;
     background: rgb(255, 255, 255);
     padding: 5px;
-    padding-right: 20px;
-    margin: 5px;
+    padding-right: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20px;
     border-radius: 4.5px;
     box-shadow: 1px 1px 31px rgb(214, 214, 214);
     border: 1px solid rgb(219, 219, 219);
@@ -117,6 +123,8 @@ export default defineComponent({
     background: rgb(24, 24, 24);
     box-shadow: 0px 11px 11px rgb(212, 212, 212);
     color: #FFFFFF;
+    width: 50%;
+    margin: auto;
 }
 #home:hover { background: radial-gradient(farthest-corner at 90px -50px, rgb(0, 255, 170), rgb(4, 0, 255)); }
 #inbox:hover { background: radial-gradient(farthest-corner at 100px -30px, rgb(145, 255, 0), rgb(4, 0, 255)); }
@@ -124,7 +132,7 @@ export default defineComponent({
 #source:hover { background: radial-gradient(farthest-corner at 70px -40px, rgb(255, 217, 0), rgb(255, 0, 85)); }
 #logout:hover { background: radial-gradient(farthest-corner at 20px -50px, rgb(255, 0, 0), rgb(234, 0, 255)); }
 /* Mail */
-.Account { margin: 0% auto 0% auto; }
+.Account { width: 74.5%; margin: 0% auto 0% auto; }
 .mail {
     border: 1px solid rgb(219, 219, 219);
     padding: 25px;
@@ -134,6 +142,7 @@ export default defineComponent({
     font-family: 'Poppins';
     box-shadow: 1px 1px 20px rgb(226, 226, 226);
     transition: 0.15s;
+    max-width: 100%;
 }
 .mail:hover {
     box-shadow: 1px 20px 50px rgb(226, 226, 226);
@@ -141,7 +150,6 @@ export default defineComponent({
 
 .view_letter {
     position: absolute;
-    background: rgb(26, 26, 26);
     color: white;
     left: 0;
     right: 0;
@@ -150,7 +158,15 @@ export default defineComponent({
     margin: 1%;
     padding: 50px;
     border-radius: 6px;
-    box-shadow: 1px 1px 100px black;
-    display: inline-block;
+
+}
+.letter {
+    background: rgba(14, 14, 14, 0.904);
+    box-shadow: 1px 1px 50px black;
+    padding: 50px;
+    font-family: 'Poppins';
+    border-radius: 8px; border: 1px solid black; animation: activate .18s;
+    text-align: left;
+
 }
 </style>
