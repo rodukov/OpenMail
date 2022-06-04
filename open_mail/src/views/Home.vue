@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-
+    <!-- Open Mail -->
     <div class="mail">
       <div class="submail">
         <p class="a b maintext">OpenMail</p>
@@ -8,24 +8,53 @@
       </div>
     </div>
 
+     <!-- Register New Mail -->
+    <div class="register" v-show="getEmails[0]">
+      <p v-on:click="$store.commit('updateWindow', false)" style="font-family: 'arial'; text-align: right; padding-right: 15px; padding-top: 15px; margin: 0;">Close</p>
+      <p class="regp">Registration</p>
+      <p class="regp-m">Receive your OpenMail. Unlimited number of mailboxes. Completely free. </p>
+      <div class="receive-div"><p class="receive" v-on:click="register_mail">Receive</p></div>
+      <div v-for="_item in getEmails[1]" :key="_item">
+        <div class="email_container"><p class="email_item">{{ _item }}</p></div>
+      </div>
+    </div>
+    <!-- Search Form -->
     <div class="search">
       <p class="a b seach-desc">Log In</p>
       <div class="searchbox-wrap">
-        <input type="text" placeholder="Give me your e-mail">
-        <button><span>Check</span> </button>
+        <input type="text" class="searcher" placeholder="Give me your e-mail" id="login_input">
+        <button class="btns" v-on:click="login();"><span class="spns">Check</span> </button>
       </div>
-      <p class="a b get-it">Dont have OpenMail? Get it! </p>
+      <p class="a b get-it" v-on:click="$store.commit('updateWindow', true)">Dont have OpenMail? Get it! </p>
     </div>
+
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default defineComponent({
   name: 'Home',
-  mounted():void {
+  computed: mapGetters(['getEmails']),
+  methods: {
+    ...mapActions(['register_mail']),
+    login() {
+      var login = (<HTMLInputElement>document.getElementById('login_input')).value;
+      localStorage.setItem('email', login);
+      this.$router.push('account')
+    }
+  },
+  mounted() {
     document.title = "OpenMail"
+    if(localStorage.email.indexOf('@') == -1) {
+    } else {
+      alert('You are already logged. Please Log Out first!')
+      this.$router.push('account')
+    }
+
+
   }
 });
 </script>
@@ -81,7 +110,7 @@ input{
   border-bottom: 1px solid rgb(170, 170, 170);
 
 }
-button{
+.btns{
     padding-right: 10px;
     background-color: #fff;
     -webkit-border-top-right-radius: 25px;
@@ -98,7 +127,7 @@ button{
     border-top: 1px solid rgb(170, 170, 170);
     border-bottom: 1px solid rgb(170, 170, 170);
 }
-span{
+.spns{
   margin-left: 50px;
   padding: 24px 45px;
       
@@ -130,5 +159,77 @@ span:hover{
   font-family: 'Poppins';
   color: rgb(28, 15, 216);
   text-decoration: underline;
+}
+
+.register {
+  /* Aligment */
+  position: absolute;
+  margin-left: 500px;
+  margin-right: 500px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  /* Customize */
+  background: rgb(252, 252, 252);
+  border-radius: 6.151px;
+  box-shadow: 0px 0px 10px rgb(192, 192, 192);
+
+  display: inline-block;
+
+  animation: activate 0.4s;
+
+}
+.regp {
+  font-family: 'Poppins';
+  font-size: 45px;
+  text-align: center;
+  color: rgb(29, 29, 29);
+  margin: 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.regp-m {
+  font-family: 'Poppins';
+  font-size: 20px;
+  text-align: center;
+  color: rgb(63, 63, 63);
+  margin: 0;
+  font-weight: 900;
+}
+.receive-div {
+  justify-content: center;
+  text-align: center;
+}
+.receive {
+  margin: 0; margin-top: 35px; margin-bottom: 35px;
+  display: inline-block;
+  background: radial-gradient(farthest-corner at -30px -20px, rgb(0, 255, 115), rgb(204, 0, 255));
+  color: #FFFFFF;
+  font-family: 'Poppins';
+  border-radius: 21px;
+  padding: 20px;
+  padding-left: 50px; padding-right: 50px;
+  letter-spacing: 1.5px;
+  transition: .1s;
+  /* box-shadow: 0px 0px 100px rgb(153, 0, 255); */
+}
+.receive:hover {
+  border-radius: 14px;
+}
+.email_item {
+  font-family: 'Poppins';
+  animation: activate .3s;
+}
+.email_container {
+  justify-content: center;
+  text-align: center;
+}
+@keyframes activate {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 </style>
