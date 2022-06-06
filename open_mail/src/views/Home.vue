@@ -27,16 +27,20 @@
       </div>
       <p class="a b get-it" v-on:click="$store.commit('updateWindow', true)">Dont have OpenMail? Get it! </p>
     </div>
-
+    <!-- About us -->
+    <about_us/>
+    
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex'
+import about_us from '../components/about_us.vue'
 
 export default defineComponent({
   name: 'Home',
+  components: { about_us },
   computed: mapGetters(['getEmails']),
   methods: {
     ...mapActions(['register_mail']),
@@ -48,11 +52,8 @@ export default defineComponent({
   },
   mounted() {
     document.title = "OpenMail"
-    if(localStorage.email.indexOf('@') == -1) {
-    } else {
-      alert('You are already logged. Please Log Out first!')
-      this.$router.push('account')
-    }
+    if(localStorage.email == undefined || localStorage.email.indexOf('@') == -1) {}
+    else { this.$router.push('account') }
 
 
   }
@@ -64,11 +65,18 @@ export default defineComponent({
   font-family: Poppins;
   font-size: 43.41px;
   color: white;
+  margin: 25px;
 }
 .slogantext { 
   font-family: Poppins;
   font-size: 22px;
   color: white;
+}
+.logo {
+  width: 62px;
+  height: 62px;
+
+  filter: invert(100%);
 }
 .mail {
   margin-top: 1.1%; margin-bottom: 1.1%;
@@ -76,10 +84,11 @@ export default defineComponent({
   padding: 50px;
   border: 1px solid rgb(231, 231, 231);
   border-radius: 15px;
-  background: url('https://hdfon.ru/wp-content/uploads/hdfon.ru-166872470.jpg');
+  background: url('https://64.media.tumblr.com/4c5a34bd6b1da7ac7f48766ab3297e2e/tumblr_pqaqoc66A11ta0hnbo1_1280.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: 0px 3px 5px rgb(179, 179, 179);
+  background-attachment: fixed;
 }
 
 .searchbox-wrap{

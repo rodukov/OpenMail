@@ -13,6 +13,7 @@
 
     <div class="Account">
         <p class="a b c myemail-is">{{ email }}</p>
+        <h1 class="null-mail" v-show="!Boolean(getInbox.length)">You did not have a inbox letters 😢</h1>
         <div v-for="_mail of getInbox" :key="_mail" class="mail" v-on:click="read(_mail)">
             <p>Received message from {{ _mail["from"] }} at {{ _mail["date"] }}</p>   
             <p>{{ _mail["subject"] }}</p>  
@@ -21,7 +22,7 @@
 
     <div class="view_letter" v-show="readshow">
         <p style="text-align: right; "><img src="../assets/hide.png" class="letter-close" style="height: 32px; width: 32px;" v-on:click="readshow=!readshow"></p>
-        <p class="a b c letter" v-html="readletter['body']"></p>
+        <div class="a b c letter" v-html="readletter['body']"></div>
     </div>
 </div>
 </template>
@@ -74,8 +75,7 @@ export default defineComponent({
     background: rgb(255, 255, 255);
     padding: 5px;
     padding-right: 50px;
-    margin-top: auto;
-    margin-bottom: auto;
+    margin-top: 20px;
     margin-left: 20px;
     border-radius: 4.5px;
     box-shadow: 1px 1px 31px rgb(214, 214, 214);
@@ -88,9 +88,10 @@ export default defineComponent({
     display: flex;
     margin-top: 25px;
     margin-bottom: 25px;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     align-content: center;
+
 }
 .header-img {
     width: 34px; height: 34px;
@@ -98,12 +99,13 @@ export default defineComponent({
     color: red;
     filter: contrast(20%);
     align-content: left;
-    margin-right: 16.41px;
+    margin-left: 15px;
+    margin-right: 22.41px;
+
 
 }
 .header-item {
     padding: 15px;
-
     font-family: 'Poppins';
     transition: .11s;
     border-radius: 7px;
@@ -160,13 +162,33 @@ export default defineComponent({
     border-radius: 6px;
 
 }
+.letter-close {
+    padding: 8px;
+    background: white;
+    box-shadow: 0px 5px 15px #C2C2C2;
+    border-radius: 8px;
+    transition: .05s;
+}
+.letter-close:hover {
+    box-shadow: 0px 10px 20px #C2C2C2;
+}
 .letter {
-    background: rgba(14, 14, 14, 0.904);
-    box-shadow: 1px 1px 50px black;
+    background: white;
     padding: 50px;
     font-family: 'Poppins';
-    border-radius: 8px; border: 1px solid black; animation: activate .18s;
-    text-align: left;
+    border-radius: 8px;
+    animation: activate .18s;
+    text-align: justify;
+    box-shadow: 0px 5px 15px #C2C2C2;
+    float: right;
 
+}
+
+.null-mail {
+    text-align: center;
+    font-family: 'arial';
+    font-weight: 900;
+    color: rgb(43, 43, 43);
+    margin-top: 105px;
 }
 </style>
