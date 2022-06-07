@@ -1,28 +1,18 @@
 <template>
 <div class="Account-view">
-    <div class="headers">
-        <div class="header-logo"></div>
-        <div class="header-items">
-            <!--div class="header-container"><img src="../assets/home.png" class="header-img"><router-link to='/' class="a c header-item" id="home">Home</router-link></div-->
-            <div class="header-container"><img src="../assets/inbox.png" class="header-img"><router-link to='/account' class="a c header-item" id="inbox">Inbox</router-link></div>
-            <div class="header-container"><img src="../assets/about.png" class="header-img"><router-link to='/about' class="a c header-item" id="about">About</router-link></div>
-            <div class="header-container"><img src="../assets/source.png" class="header-img"><a href='https://github.com/rodukov/OpenMail/' class="a c header-item" id="source">Source</a></div>
-            <div class="header-container"><img src="../assets/home.png" class="header-img"><p v-on:click="logout()" class="a c header-item" id="logout">Log Out</p></div>
-        </div>
-    </div>    
-
+    <headers/>
     <div class="Account">
-        <p class="a b c myemail-is">{{ email }}</p>
-        <h1 class="null-mail" v-show="!Boolean(getInbox.length)">You did not have a inbox letters 😢</h1>
+        <p class="a b c myemail-is">{{ getEmail }}</p>
+        <h1 class="null-mail" v-show="!Boolean(getInbox.length)">You did not have inbox letters 😢</h1>
         <div v-for="_mail of getInbox" :key="_mail" class="mail" v-on:click="read(_mail)">
             <p>Received message from {{ _mail["from"] }} at {{ _mail["date"] }}</p>   
             <p>{{ _mail["subject"] }}</p>  
         </div>
     </div>
 
-    <div class="view_letter" v-show="readshow">
-        <p style="text-align: right; "><img src="../assets/hide.png" class="letter-close" style="height: 32px; width: 32px;" v-on:click="readshow=!readshow"></p>
-        <div class="a b c letter" v-html="readletter['body']"></div>
+    <div class="view_letter" v-show="getReadShow">
+        <p style="text-align: right; "><img src="../assets/hide.png" class="letter-close" style="height: 32px; width: 32px;" v-on:click="$store.commit('updateReadShow', !getReadShow)"></p>
+        <div class="a b c letter" v-html="getReadLetter['body']"></div>
     </div>
 </div>
 </template>
@@ -31,36 +21,17 @@
 import { defineComponent } from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 import axios from 'axios'
-import {AxiosResponse} from 'axios';
+import { AxiosResponse } from 'axios';
+import headers from '../components/headers.vue'
 
 export default defineComponent({
     name: 'Account',
-    data() {
-        return {
-            email: localStorage.email,
-            readletter: [],
-            readshow: false
-        }
-    },
-    computed: mapGetters(['getInbox']),
-    methods: {
-        ...mapActions(['inbox']),
-        logout() {
-            localStorage.setItem('email', 'null');
-            this.$router.push('/')
-        },
-        read: async function(_mail: any) {
-            console.log(_mail)
-            await axios.get(`https://www.1secmail.com/api/v1/?action=readMessage&login=${this.email.split('@')[0]}&domain=${this.email.split('@')[1]}&id=${_mail['id']}`)
-                .then((response: AxiosResponse) => {
-                    this.readletter = response.data
-                });
-            this.readshow = true;    
-        }
-    },
+    components: { headers },
+    computed: mapGetters(['getInbox', 'getReadLetter', 'getReadShow', 'getEmail']),
+    methods: mapActions(['inbox', 'read']),
     mounted() {
-        document.title = `${this.email} | OpenMail`;
-        this.inbox(localStorage.email)
+        document.title = `${this.getEmail} | OpenMail`;
+        this.inbox(this.getEmail)
     }
 })
 </script>

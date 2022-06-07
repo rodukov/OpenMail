@@ -1,33 +1,9 @@
 <template>
   <div class="home">
-    <!-- Open Mail -->
-    <div class="mail">
-      <div class="submail">
-        <p class="a b maintext">OpenMail</p>
-        <p class="a b slogantext">The fastest way to receive mail, and now also convenient</p>
-      </div>
-    </div>
 
-     <!-- Register New Mail -->
-    <div class="register" v-show="getEmails[0]">
-      <p v-on:click="$store.commit('updateWindow', false)" style="font-family: 'arial'; text-align: right; padding-right: 15px; padding-top: 15px; margin: 0;"><img src="../assets/hide.png" style="height: 32px; width: 32px;"></p>
-      <p class="regp">Registration</p>
-      <p class="regp-m">Receive your OpenMail. Unlimited number of mailboxes. Completely free. </p>
-      <div class="receive-div"><p class="receive" v-on:click="register_mail">Receive</p></div>
-      <div v-for="_item in getEmails[1]" :key="_item">
-        <div class="email_container"><p class="email_item">{{ _item }}</p></div>
-      </div>
-    </div>
-    <!-- Search Form -->
-    <div class="search">
-      <p class="a b seach-desc">Log In</p>
-      <div class="searchbox-wrap">
-        <input type="text" class="searcher" placeholder="Give me your e-mail" id="login_input">
-        <button class="btns" v-on:click="login();"><span class="spns">Check</span> </button>
-      </div>
-      <p class="a b get-it" v-on:click="$store.commit('updateWindow', true)">Dont have OpenMail? Get it! </p>
-    </div>
-    <!-- About us -->
+    <welcome/>
+    <register/>
+    <logins/>
     <about_us/>
     <footers/>
     
@@ -39,26 +15,20 @@ import { defineComponent } from 'vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import about_us from '../components/about_us.vue'
 import footers from '../components/footers.vue'
+import welcome from '../components/welcome.vue'
+import register from '../components/register.vue'
+import logins from '../components/logins.vue'
+
 
 export default defineComponent({
   name: 'Home',
-  components: { about_us, footers },
-  computed: mapGetters(['getEmails']),
-  methods: {
-    ...mapActions(['register_mail']),
-    login() {
-      var login = (<HTMLInputElement>document.getElementById('login_input')).value;
-      localStorage.setItem('email', login);
-      this.$router.push('account')
-    }
-  },
+  components: { about_us, footers, welcome, register, logins },
   mounted() {
     document.title = "OpenMail"
     if(localStorage.email == undefined || localStorage.email.indexOf('@') == -1) {}
     else { this.$router.push('account') }
-
-
   }
+  
 });
 </script>
 
