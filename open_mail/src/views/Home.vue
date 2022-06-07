@@ -29,6 +29,7 @@
     </div>
     <!-- About us -->
     <about_us/>
+    <footers/>
     
   </div>
 </template>
@@ -37,10 +38,11 @@
 import { defineComponent } from 'vue';
 import { mapGetters, mapActions, mapMutations } from 'vuex'
 import about_us from '../components/about_us.vue'
+import footers from '../components/footers.vue'
 
 export default defineComponent({
   name: 'Home',
-  components: { about_us },
+  components: { about_us, footers },
   computed: mapGetters(['getEmails']),
   methods: {
     ...mapActions(['register_mail']),
@@ -80,11 +82,11 @@ export default defineComponent({
 }
 .mail {
   margin-top: 1.1%; margin-bottom: 1.1%;
-  margin-left: 15%; margin-right: 15%;
+  margin-left: 10%; margin-right: 10%;
   padding: 50px;
   border: 1px solid rgb(231, 231, 231);
   border-radius: 15px;
-  background: url('https://64.media.tumblr.com/4c5a34bd6b1da7ac7f48766ab3297e2e/tumblr_pqaqoc66A11ta0hnbo1_1280.jpg');
+  background: url('../assets/welcm.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: 0px 3px 5px rgb(179, 179, 179);
@@ -168,6 +170,7 @@ span:hover{
   font-family: 'Poppins';
   color: rgb(28, 15, 216);
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .register {

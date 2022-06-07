@@ -173,7 +173,7 @@ export default defineComponent({
     box-shadow: 0px 10px 20px #C2C2C2;
 }
 .letter {
-    background: white;
+    background: #FFFFFF;
     padding: 50px;
     font-family: 'Poppins';
     border-radius: 8px;
@@ -181,9 +181,8 @@ export default defineComponent({
     text-align: justify;
     box-shadow: 0px 5px 15px #C2C2C2;
     float: right;
-
+    transition: .15s;
 }
-
 .null-mail {
     text-align: center;
     font-family: 'arial';

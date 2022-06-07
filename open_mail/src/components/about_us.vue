@@ -1,4 +1,6 @@
 <template>
+<div>
+<h2 class="why-h">Why OpenMail?</h2>
 <div class="about-us">
     <div class="about-us-container">
         <h2 class="why">Anonymous</h2>
@@ -61,6 +63,7 @@
         like Aldus PageMaker including versions of Lorem Ipsum.</p>
     </div>
 </div>
+</div>
 </template>
 
 <script>
@@ -89,5 +92,12 @@ export default {
 .why {
     font-family: 'Poppins';
     color: white;
+}
+.why-h {
+    margin: 5px;
+    margin-left: 25px;
+    font-family: 'Poppins';
+    font-size: 30px;
+    color: #2F2F2F;
 }
 </style>
