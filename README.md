@@ -6,5 +6,6 @@ After installation vue run: `npm run serve`
 if you want to raise your OpenMail service use this command: `npm run build`
 
 ## Project Files
-| Name | Path |
-| test | test |
+| Component     | Path          | Description |
+| :---          | :---:         | :---        |
+| Content Cell  | Content Cell  | 1 |
