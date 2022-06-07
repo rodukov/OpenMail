@@ -7,7 +7,7 @@ if you want to raise your OpenMail service use this command: `npm run build`
 
 ## Project Files
 | Component    |  Path                          | Description                  |
-| :---         | :---:                          | :---                         |
+| :---         | :---                           | :---                         |
 | About Us     | `../components/about_us.vue`   | Service Information          |
 | Footer       | `../components/footers.vue`    | Footer of OpenMail           |
 | Header       | `../components/headers.vue`    | Account Header               |
