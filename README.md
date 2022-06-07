@@ -5,8 +5,8 @@ After installation vue run: `npm run serve`
 ### Build for production
 if you want to raise your OpenMail service use this command: `npm run build`
 
-## Project Files
-### Components
+## 🗂 Project Files
+### 📎 Components
 | Component    |  Path                          | Description                  |
 | :---         | :---                           | :---                         |
 | About Us     | `../components/about_us.vue`   | Service Information          |
@@ -16,7 +16,7 @@ if you want to raise your OpenMail service use this command: `npm run build`
 | Login        | `../components/login.vue`      | Login Input Form             |
 | Register     | `../components/register.vue`   | Registration of new OpenMail |
 | Welcome      | `../components/welcome.vue`    | Welcome Message              |
-### Views
+### 🖇 Views
 | Views        |  Path                  | URL        | Description | 
 | :---         | :---                   | :---       | :---        |
 | About        | `../views/About.vue`   | `/about`   | About Page(dev) |
